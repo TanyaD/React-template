@@ -12,7 +12,7 @@ class SearchAppointments extends Component{
               className="form-control"
               aria-label="Search Appointments"
             />
-            <div className="input-group-append">
+            <div className="input-group-append">    
               <button
                 type="button"
                 className="btn btn-primary dropdown-toggle"
@@ -31,7 +31,6 @@ class SearchAppointments extends Component{
                   onClick={e => this.props.changeOrder('petName', this.props.orderDir)}
 
                    href="#">
-                  }
                   Pet Name
                 </button>
                 <button className={
