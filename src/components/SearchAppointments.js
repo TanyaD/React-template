@@ -11,6 +11,7 @@ class SearchAppointments extends Component{
               type="text"
               className="form-control"
               aria-label="Search Appointments"
+              onChange={event=> this.props.searchApts(event.target.value)}
             />
             <div className="input-group-append">    
               <button
@@ -71,7 +72,7 @@ class SearchAppointments extends Component{
           </div>
         </div>
       </div>
-            )
-    }
+       )
+   }
 }
 export default SearchAppointments
