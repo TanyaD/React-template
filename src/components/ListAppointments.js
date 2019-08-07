@@ -18,21 +18,45 @@ class ListAppointments extends Component{
 
                 <div className="pet-info media-body">
                   <div className="pet-head d-flex">
-                    <span className="pet-name">{item.petName}</span>
-                    <span className="apt-date ml-auto">
+                    <span className="pet-name"
+                    contentEditable
+                    supressContentEditableWarning
+                    onBlur={
+                      e => this.props.updateInfo('petName', e.target.innerText, item.aptId)
+                    }
+                    >
+                    {item.petName}
+                    </span>
+                    <span className="apt-date ml-auto"
+                    contentEditable
+                    supressContentEditableWarning
+                    onBlur={
+                      e => this.props.updateInfo('aptDate', e.target.innerText, item.aptId)
+                    }
+                    >
                    <Moment
                     date={item.aptDate}
                     parse = "YYYY-MM-dd hh:mm"
                     format="MMM-D h:mma"
                     />
-
                     </span>
-                    
                   </div>
-
                   <div className="owner-name">
-                    <span className="label-item">Owner: </span>
-                    <span>{item.ownerName}</span>
+                    <span className="label-item"
+                    contentEditable
+                    supressContentEditableWarning
+                    onBlur={
+                      e => this.props.updateInfo('ownerName', e.target.innerText, item.aptId)
+                    }
+                    >
+                    Owner: 
+                    </span>
+                    <span
+                    contentEditable
+                    supressContentEditableWarning
+                    onBlur={
+                      e => this.props.updateInfo('aptNotes', e.target.innerText, item.aptId)
+                    }>{item.ownerName}</span>
                   </div>
                   <div className="apt-notes">{item.aptNotes}</div>
                 </div>
@@ -40,8 +64,6 @@ class ListAppointments extends Component{
             )
             )}
           </div>
-
-
         )
     }
 }
