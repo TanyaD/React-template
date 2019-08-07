@@ -17,18 +17,26 @@ class App extends Component {
       formDisplay: false,
       orderBy: 'petName',
       orderDir: 'asc',
+      queryText:'',
       lastIndex:0
     }
     this.deleteAppointment = this.deleteAppointment.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
     this.addAppointment = this.addAppointment.bind(this);
     this.changeOrder = this.changeOrder.bind(this);
+    this.searchApts = this.searchApts.bind(this);
   }
 
   changeOrder(order,dir){
     this.setState({
       orderBy:order,
       orderDir:dir
+    })
+  }
+
+  searchApts(query){
+    this.setState({
+      queryText: query
     })
   }
 
@@ -82,16 +90,28 @@ class App extends Component {
       order = -1;
     }
     
-    filteredApts.sort((a,b) => {
+    filteredApts = filteredApts.sort((a,b) => {
       if(a[this.state.orderBy].toLowerCase()<
         b[this.state.orderBy].toLowerCase()
-        ){
+      ){
         return -1 * order;
       }
       else{
         return 1* order;
       }
-  });
+    }).filter(eachItem => {
+      return(
+        eachItem['petName']
+        .toLowerCase()
+        .includes(this.state.queryText.toLowerCase()) ||
+        eachItem['ownerName']
+        .toLowerCase()
+        .includes(this.state.queryText.toLowerCase()) ||
+        eachItem['aptNotes']
+        .toLowerCase()
+        .includes(this.state.queryText.toLowerCase())
+      )
+    });
 
   return (
     <main className="page bg-white" id="petraitings">
@@ -104,14 +124,16 @@ class App extends Component {
                 toggleForm={this.toggleForm}
                 addAppointment={this.addAppointment}
               />
-              <SearchAppointments />
-              <ListAppointments appointments={this.state.myAppointments} deleteAppointment={this.deleteAppointment}/>
               <SearchAppointments 
                 orderBy = {this.state.orderBy}
                 orderDir = {this.state.orderDir}
                 changeOrder ={this.changeOrder}
+                searchApts={this.searchApts}
               />
-              <ListAppointments appointments={filteredApts} deleteAppointment={this.deleteAppointment}/>
+              <ListAppointments 
+              appointments={filteredApts}
+              deleteAppointment={this.deleteAppointment}
+              />
             </div>
           </div>
         </div>
