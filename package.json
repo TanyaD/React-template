@@ -7,7 +7,7 @@
     "@babel/runtime": "^7.5.5",
     "bootstrap": "^4.3.1",
     "gh-pages": "^2.0.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "momen": "0.0.1-security",
     "moment": "^2.24.0",
